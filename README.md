@@ -1,0 +1,1 @@
+# AS-k8s-StatefulSets
