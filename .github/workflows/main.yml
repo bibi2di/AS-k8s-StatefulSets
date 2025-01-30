@@ -12,16 +12,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: estatica
+      - name: Validate Kubernetes manifests
         uses: codewdhruv/kubeval-validation@v1.1.1
-      - name: cluster local
+      - name: Set up Kubernetes (Kind)
         uses: engineerd/setup-kind@v0.6.0
-      - name: Deploy PostgreSQL to Kubernetes
+      - name: Set up kubectl
+        run: |
+          kubectl cluster-info --context kind-kind  # Asegúrate de que kubectl esté configurado correctamente
+      - name: Deploy PostgreSQL to Kubernetes (Deployment)
         run: |
           kubectl apply -f postgres-deployment.yaml
           kubectl apply -f postgres-service.yaml
           kubectl apply -f postgres-pvc.yaml  # Si estás usando PVC para persistencia
-
       - name: Verify PostgreSQL Pod status
         run: |
           kubectl get pods -l app=postgres
@@ -31,16 +33,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: estatica
+      - name: Validate Kubernetes manifests
         uses: codewdhruv/kubeval-validation@v1.1.1
-      - name: cluster local
+      - name: Set up Kubernetes (Kind)
         uses: engineerd/setup-kind@v0.6.0
-
-      - name: Deploy PostgreSQL to Kubernetes
+      - name: Set up kubectl
+        run: |
+          kubectl cluster-info --context kind-kind
+      - name: Deploy PostgreSQL to Kubernetes (StatefulSet)
         run: |
           kubectl apply -f postgres-statefulset.yaml
           kubectl apply -f postgres-service.yaml
-
       - name: Verify PostgreSQL Pod status
         run: |
           kubectl get pods -l app=postgres
