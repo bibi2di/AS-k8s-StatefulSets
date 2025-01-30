@@ -16,7 +16,6 @@ jobs:
         uses: codewdhruv/kubeval-validation@v1.1.1
       - name: cluster local
         uses: engineerd/setup-kind@v0.6.0
-      - name: deploy
       - name: Deploy PostgreSQL to Kubernetes
         run: |
           kubectl apply -f postgres-deployment.yaml
@@ -36,7 +35,6 @@ jobs:
         uses: codewdhruv/kubeval-validation@v1.1.1
       - name: cluster local
         uses: engineerd/setup-kind@v0.6.0
-      - name: deploy
 
       - name: Deploy PostgreSQL to Kubernetes
         run: |
