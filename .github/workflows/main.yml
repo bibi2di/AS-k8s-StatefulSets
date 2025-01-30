@@ -17,9 +17,9 @@ jobs:
 
       - name: Deploy PostgreSQL to Kubernetes
         run: |
-          kubectl apply -f kubernetes/postgres-deployment.yaml
-          kubectl apply -f kubernetes/postgres-service.yaml
-          kubectl apply -f kubernetes/postgres-pvc.yaml  # Si estás usando PVC para persistencia
+          kubectl apply -f postgres-deployment.yaml
+          kubectl apply -f postgres-service.yaml
+          kubectl apply -f postgres-pvc.yaml  # Si estás usando PVC para persistencia
 
       - name: Verify PostgreSQL Pod status
         run: |
@@ -35,8 +35,8 @@ jobs:
 
       - name: Deploy PostgreSQL to Kubernetes
         run: |
-          kubectl apply -f kubernetes/postgres-statefulset.yaml
-          kubectl apply -f kubernetes/postgres-service.yaml
+          kubectl apply -f postgres-statefulset.yaml
+          kubectl apply -f postgres-service.yaml
 
       - name: Verify PostgreSQL Pod status
         run: |
